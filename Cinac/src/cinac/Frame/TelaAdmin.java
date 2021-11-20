@@ -71,7 +71,7 @@ public class TelaAdmin {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    TelaCatalogo tt = new TelaCatalogo();
+                    TelaCadastrofilme tt = new TelaCadastrofilme();
                 }
             });
             
