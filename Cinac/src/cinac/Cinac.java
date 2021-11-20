@@ -5,7 +5,7 @@
  */
 package cinac;
 
-import cinac.Frame.TelaAdmin;
+import cinac.Frame.TelaCatalogo;
 
 /**
  *
@@ -17,7 +17,8 @@ public class Cinac {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws NullPointerException {
-        TelaAdmin tt = new TelaAdmin();
+        TelaCatalogo tt = new TelaCatalogo();
+        
     }
     
 }

@@ -255,7 +255,7 @@ public class TelaCatalogo extends JFrame{
     }
     
     public TelaCatalogo(){
-        ImageIcon logo = new ImageIcon(getClass().getResource("logo.png"));
+        ImageIcon logo = new ImageIcon(getClass().getResource("logo2.png"));
         Image image = logo.getImage();  
         Image newimg = image.getScaledInstance(190, 190, Image.SCALE_SMOOTH);  
         logo = new ImageIcon(newimg);  
@@ -272,7 +272,6 @@ public class TelaCatalogo extends JFrame{
         setSize(400, 400);
         setResizable(false);
         setLocationRelativeTo(null);
-        setVisible(true);
         setTitle("Catálogo de Filmes");
         getContentPane().setBackground(new Color(130,33,25));
         // FUNDO COR RGB: 130, 33, 25
@@ -319,7 +318,7 @@ public class TelaCatalogo extends JFrame{
         add(painelFilmes);
         //franklin gothic
                  
-    
+    setVisible(true);
 
     }
       
