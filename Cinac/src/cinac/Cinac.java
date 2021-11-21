@@ -6,6 +6,7 @@
 package cinac;
 
 import cinac.Frame.Telalogin;
+import java.io.IOException;
 
 /**
  *
@@ -16,8 +17,9 @@ public class Cinac {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws NullPointerException {
+    public static void main(String[] args) throws NullPointerException, IOException {
          Telalogin tt = new Telalogin();
+         
         
     }
     

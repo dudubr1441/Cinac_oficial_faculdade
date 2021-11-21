@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import cinac.CinacDao.FabricaConexao;
 
+//@author luiz_eduardo
+
 public class ProdutoDao {
     protected Connection conexao;
     protected PreparedStatement preparando;

@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author maste
+ * @author Luiz Eduardo
  */
 public class TelaAdmin {
     JFrame jFrame_janela_inicial;

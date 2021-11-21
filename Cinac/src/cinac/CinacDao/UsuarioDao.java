@@ -7,7 +7,7 @@ package cinac.CinacDao;
 
 /**
  *
- * @author maste
+ * @author Luiz_eduardo
  */
 public class UsuarioDao {
     

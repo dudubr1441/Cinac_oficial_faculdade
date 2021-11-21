@@ -13,7 +13,7 @@ import java.sql.Statement;
 
 /**
  *
- * @author franc
+ * @author luiz_eduardo
  */
 public class FabricaConexao {
     public static Connection abrirConexao() throws SQLException{

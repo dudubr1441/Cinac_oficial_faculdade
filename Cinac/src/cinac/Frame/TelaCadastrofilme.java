@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author maste
+ * @author JOAO EDUARDO
  */
 public class TelaCadastrofilme {
         
