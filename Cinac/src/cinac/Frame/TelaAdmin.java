@@ -43,7 +43,7 @@ public class TelaAdmin {
             jFrame_janela_inicial.setResizable(false);
             jFrame_janela_inicial.setLayout(null);
             jFrame_janela_inicial.setSize(400, 400);
-            jFrame_janela_inicial.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE ); 
+            jFrame_janela_inicial.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE ); 
             jFrame_janela_inicial.setLocationRelativeTo(null);
             jFrame_janela_inicial.getRootPane().setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.BLACK));
         

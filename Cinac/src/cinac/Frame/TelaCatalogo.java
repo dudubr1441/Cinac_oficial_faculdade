@@ -121,7 +121,7 @@ public class TelaCatalogo extends JFrame{
     private static class TelaSala {
         
         public TelaSala() {
-        JFrame TelaSala = new JFrame("Selecionar Sala para Exibição");
+        JFrame TelaSala = new JFrame("Selecionar Sala");
         TelaSala.setLayout(null);
         TelaSala.setSize(400, 400);
         TelaSala.setResizable(false);
