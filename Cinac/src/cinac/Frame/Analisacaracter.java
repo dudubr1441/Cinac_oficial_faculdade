@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
  * @author maste
  */
 public class Analisacaracter {
+    
 public static boolean Validacao_senha(String password) 
 {
 

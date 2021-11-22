@@ -5,6 +5,8 @@
  */
 package cinac.Frame;
 
+import cinac.Entidade.usuario;
+import cinac.CinacDao.UsuarioDao;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -12,6 +14,9 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -42,7 +47,7 @@ public class Telalogin {
     JLabel jlabel_confirmarsenha_cadastrocliente;
     JTextField jTextField_confirmarsenha_cadastrocliente;
     JButton jButton_cadastro;
-    JButton jButton_requisitos;
+    JButton jButton_requisitosSenha;
     
     JPanel jPanel_logincliente;
     JLabel jLabel_titulologin;
@@ -64,7 +69,7 @@ public class Telalogin {
         jlabel_confirmarsenha_cadastrocliente = new JLabel("Confirmar senha:");
         jTextField_confirmarsenha_cadastrocliente = new JTextField();
         jButton_cadastro = new JButton();
-        jButton_requisitos = new JButton();
+        jButton_requisitosSenha = new JButton();
         
         jPanel_logincliente = new JPanel();
         jLabel_titulologin = new JLabel("Login");
@@ -126,16 +131,36 @@ public class Telalogin {
         jButton_cadastro.setRequestFocusEnabled(false);
         jButton_cadastro.setRolloverEnabled(false);
         jButton_cadastro.setMargin(new Insets(2, 1000, 2, 14));
-        
+        jButton_cadastro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                usuario tt = new usuario();
+                UsuarioDao sv = new UsuarioDao();
+                if (!jTextField_usuario_cadastrocliente.getText().isEmpty()) {  
+                if (Analisacaracter.Validacao_senha(jTextField_senha_cadastrocliente.getText())!=false) {
+                    if (jTextField_senha_cadastrocliente.getText().equals(jTextField_confirmarsenha_cadastrocliente.getText())) {
+                tt.setSenha_usuario(jTextField_senha_cadastrocliente.getText());
+                tt.setNome_usuario(jTextField_usuario_cadastrocliente.getText());
+                sv.salvarusuario(tt);              
+                    }
+                    else{JOptionPane.showMessageDialog(null, "Senhas não compativeis");jTextField_senha_cadastrocliente.setText("");jTextField_usuario_cadastrocliente.setText("");jTextField_confirmarsenha_cadastrocliente.setText("");}
+                }else{JOptionPane.showMessageDialog(null, "releia os requisitos");jTextField_senha_cadastrocliente.setText("");jTextField_usuario_cadastrocliente.setText("");jTextField_confirmarsenha_cadastrocliente.setText("");}
+                
+                }
+                else{JOptionPane.showMessageDialog(null, "preencha os campos");jTextField_senha_cadastrocliente.setText("");jTextField_usuario_cadastrocliente.setText("");jTextField_confirmarsenha_cadastrocliente.setText("");
+                }
+            }
+            
+        });
         Image Simbolo_Exclamacao = ImageIO.read(getClass().getResource("Símbolo_Exclamação.png"));
-        jButton_requisitos.setBounds(340, 145, 40, 30);
-        jButton_requisitos.setIcon(new ImageIcon(Simbolo_Exclamacao));
-        jButton_requisitos.setBackground(color_VERMELHO);
-        jButton_requisitos.setBorder(null);
-        jButton_requisitos.setOpaque(false);
-        jButton_requisitos.setContentAreaFilled(false);
-        jButton_requisitos.setBorderPainted(false);
-        jButton_requisitos.addActionListener(new ActionListener() {
+        jButton_requisitosSenha.setBounds(340, 145, 40, 30);
+        jButton_requisitosSenha.setIcon(new ImageIcon(Simbolo_Exclamacao));
+        jButton_requisitosSenha.setBackground(color_VERMELHO);
+        jButton_requisitosSenha.setBorder(null);
+        jButton_requisitosSenha.setOpaque(false);
+        jButton_requisitosSenha.setContentAreaFilled(false);
+        jButton_requisitosSenha.setBorderPainted(false);
+        jButton_requisitosSenha.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 JOptionPane.showMessageDialog(jPanel_cadastrocliente,"requisitos\n8 caracteres\num ou mais caracteres especiais\numa ou mais letras maiusculas\n");
@@ -186,7 +211,7 @@ public class Telalogin {
         jPanel_cadastrocliente.add(jlabel_confirmarsenha_cadastrocliente);
         jPanel_cadastrocliente.add(jTextField_confirmarsenha_cadastrocliente);
         jPanel_cadastrocliente.add(jButton_cadastro);
-        jPanel_cadastrocliente.add(jButton_requisitos);
+        jPanel_cadastrocliente.add(jButton_requisitosSenha);
         
         jPanel_logincliente.add(jLabel_titulologin);
         jPanel_logincliente.add(jlabel_usuario_logincliente);
