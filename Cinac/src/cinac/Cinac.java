@@ -5,8 +5,11 @@
  */
 package cinac;
 
+import cinac.CinacDao.UsuarioDao;
+import cinac.Entidade.usuario;
 import cinac.Frame.Telalogin;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  *
@@ -17,8 +20,10 @@ public class Cinac {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws NullPointerException, IOException {
-         Telalogin tt = new Telalogin();
+    public static void main(String[] args) throws NullPointerException, IOException, SQLException {
+      Telalogin tt = new Telalogin();
+ 
+         
          
         
     }

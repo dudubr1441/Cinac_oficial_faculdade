@@ -7,6 +7,7 @@ package cinac.Frame;
 
 import cinac.Entidade.usuario;
 import cinac.CinacDao.UsuarioDao;
+import cinac.Frame.TelaAdmin;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -141,7 +142,11 @@ public class Telalogin {
                     if (jTextField_senha_cadastrocliente.getText().equals(jTextField_confirmarsenha_cadastrocliente.getText())) {
                 tt.setSenha_usuario(jTextField_senha_cadastrocliente.getText());
                 tt.setNome_usuario(jTextField_usuario_cadastrocliente.getText());
-                sv.salvarusuario(tt);              
+                        try {              
+                            sv.cadastro_usuario(tt);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Telalogin.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                     else{JOptionPane.showMessageDialog(null, "Senhas não compativeis");jTextField_senha_cadastrocliente.setText("");jTextField_usuario_cadastrocliente.setText("");jTextField_confirmarsenha_cadastrocliente.setText("");}
                 }else{JOptionPane.showMessageDialog(null, "releia os requisitos");jTextField_senha_cadastrocliente.setText("");jTextField_usuario_cadastrocliente.setText("");jTextField_confirmarsenha_cadastrocliente.setText("");}
@@ -198,7 +203,34 @@ public class Telalogin {
         jButton_login.setRequestFocusEnabled(false);
         jButton_login.setRolloverEnabled(false);
         jButton_login.setMargin(new Insets(2, 1000, 2, 14));
-        
+        jButton_login.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                usuario tt = new usuario();
+                UsuarioDao sv = new UsuarioDao();
+                tt.setNome_usuario(jTextField_usuario_logincliente.getText());
+                tt.setSenha_usuario(jTextField_senha_logincliente.getText());
+                if (!tt.getNome_usuario().isEmpty()&&!tt.getSenha_usuario().isEmpty()) {
+                    try {
+                        if (sv.login_usuario(tt)==true) {
+                            if (tt.getNome_usuario().equals("admin")) {
+                            TelaAdmin telaadmin = new TelaAdmin();
+                            jFrame_telalogin.dispose();
+                            }else{
+                            TelaCatalogo Telacatalogo = new TelaCatalogo();
+                            jFrame_telalogin.dispose();
+                            }
+                        } else {
+                           JOptionPane.showMessageDialog(jFrame_telalogin,"usuario ou senha invalida");
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Telalogin.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(jFrame_telalogin,"preencha os campos");
+                }
+            }
+        });
         
         
         

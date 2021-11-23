@@ -10,8 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,7 +20,7 @@ public class UsuarioDao {
     protected Connection conexao;
     protected PreparedStatement preparando;
     protected ResultSet resultSet;
-    public void salvarusuario(usuario us){
+    public void cadastro_usuario(usuario us) throws SQLException{
         String sql = "insert into usuario(Nome_usuario,Senha_usuario) values (?,?)";
         try {
             conexao = FabricaConexao.abrirConexao();
@@ -36,53 +35,36 @@ public class UsuarioDao {
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro ao salvar:" + e.getMessage());
         }       
-        finally{FabricaConexao.fecharConexao(conexao, preparando);}
+        finally{FabricaConexao.fecharConexao(conexao, preparando);}        
     }
-    
-        public static boolean compararnome_usuario(usuario tt){
-    String sqll = "SELECT Nome_usuario from usuario where Nome_usuario = ?;";
-    Connection conexao2 = FabricaConexao.abrirConexao();
-         PreparedStatement preparando2 = conexao2.prepareStatement(sql);
-         ResultSet resultado2 ;
+    public boolean login_usuario(usuario tt) throws SQLException{ 
+        
+    String sql="SELECT Nome_usuario,Senha_usuario from usuario where Nome_usuario =? and Senha_usuario =?";
         try {
-         preparando2.setString(1, tt.getNome_usuario());
-         resultado2 = preparando2.executeQuery();
-            if (!resultado2.getString("Nome_usuario").equals(tt.getNome_usuario())) {
-                return false;
+            conexao = FabricaConexao.abrirConexao();
+            preparando = conexao.prepareStatement(sql);
+            preparando.setString(1,tt.getNome_usuario());
+            preparando.setString(2,tt.getSenha_usuario());
+            resultSet = preparando.executeQuery();
+            if (resultSet.next()==true) {
+                return true;
             }else{
-            return true;
+                return false;
             }
-            
-            
         } catch (SQLException e) {
         }
-        finally{try {
-            FabricaConexao.fecharConexao(conexao2, preparando2, resultado2);
-        } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        finally{FabricaConexao.fecharConexao(conexao, preparando);}
+        return login_usuario(tt);
+    }
+    
+    
 }
-        
-        public static boolean compararsenha_usuario(usuario tt) {
-    String sql = "SELECT Nome_usuario,Senha_usuario from usuario where Nome_usuario = ? and Senha_usuario = ?;";
-    Connection conexao3 = FabricaConexao.abrirConexao();
-    PreparedStatement preparando3 = conexao3.prepareStatement(sql);
-    ResultSet resultado3;
-        try {
-         preparando3.setString(1, tt.getNome_usuario());
-         preparando3.setString(2, tt.getSenha_usuario());
-         ResultSet resultado3 = preparando3.executeQuery();
-            if (!resultado3.getString("Senha_usuario").equals(tt.getSenha_usuario())&&!resultado3.getString("Nome_usuario").equals(tt.getNome_usuario())) {
-                return false;
-            }else{
-            return true;
-            }
-            
-            
-        } catch (SQLException e) {}
-        finally{FabricaConexao.fecharConexao(conexao3, preparando3, resultado3);            
-        }
-        
 
+    
+
+
+
+    
+  
 
     
